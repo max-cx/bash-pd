@@ -10,7 +10,7 @@
 
 # Fail on errors
 set -e
-# source: https://www.gnu.org/software/bash/manual/bash.txt
+# https://www.gnu.org/software/bash/manual/bash.txt
 # 'set' allows you to change the values of shell options and set the positional parameters, or to display the names and values of shell variables.
 # When options are supplied, they set or unset shell attributes. Options, if specified, have the following meanings:
 # '-e'
@@ -71,7 +71,56 @@ cd .vale/styles || exit
 #    N is omitted, the exit status is that of the last command executed.
 #    Any trap on 'EXIT' is executed before the shell terminates.
 
-rm -rf RedHat CheDocs 
+rm -rf RedHat CheDocs
+# rm (GNU coreutils)
+# https://www.gnu.org/software/coreutils/manual/html_node/rm-invocation.html
+# rm removes each given file.
+# ‘-r’/‘-R’/‘--recursive’
+#   Remove the listed directories and their contents recursively.
+# ‘-f’/‘--force’
+#   Ignore nonexistent files and missing operands, and never prompt the user. Ignore any previous --interactive (-i) option.
 
 wget -qO- https://github.com/redhat-documentation/vale-at-red-hat/releases/latest/download/RedHat.zip | unzip -q -
 wget -qO- https://github.com/eclipse-che/che-docs-vale-style/releases/latest/download/CheDocs.zip | unzip -q -
+# https://www.gnu.org/software/wget/
+# https://www.gnu.org/software/wget/manual/
+# GNU Wget is a free utility for non-interactive download of files from the Web.
+# ‘-q’/‘--quiet’
+#   Turn off Wget’s output.
+# ‘-O file’
+# If ‘-’ is used as file, documents will be printed to standard output, disabling link conversion.
+# You would like the output documents to go to standard output instead of to files?
+#   wget -O - http://jagor.srce.hr/ http://www.srce.hr/
+# http://infozip.sourceforge.net/UnZip.html
+# https://www.tutorialspoint.com/unix_commands/unzip.htm
+# unzip will list, test, or extract files from a ZIP archive
+# -q  quiet mode 
+# https://www.gnu.org/software/bash/manual/bash.txt
+# 3.4.2 Special Parameters
+# '-'
+#    ($-, a hyphen.)  Expands to the current option flags as specified
+#    upon invocation, by the 'set' builtin command, or those set by the
+#    shell itself (such as the '-i' option).
+# https://www.gnu.org/software/bash/manual/bash.txt
+# 2 Definitions
+# 'control operator'
+#    A 'token' that performs a control function.  It is a 'newline' or
+#    one of the following: '||', '&&', '&', ';', ';;', ';&', ';;&', '|',
+#    '|&', '(', or ')'.
+# 'metacharacter'
+#    A character that, when unquoted, separates words.  A metacharacter
+#    is a 'space', 'tab', 'newline', or one of the following characters:
+#    '|', '&', ';', '(', ')', '<', or '>'.
+# 3.2.3 Pipelines
+# ---------------
+# A 'pipeline' is a sequence of one or more commands separated by one of
+# the control operators '|' or '|&'.
+#  The format for a pipeline is
+#    [time [-p]] [!] COMMAND1 [ | or |& COMMAND2 ] ...
+# The output of each command in the pipeline is connected via a pipe to
+# the input of the next command.  That is, each command reads the previous
+# command's output.  This connection is performed before any redirections
+# specified by the command.
+# Each command in a pipeline is executed in its own subshell, which is
+# a separate process ...
+# (noting that '|' appears in other contexts in https://www.gnu.org/software/bash/manual/bash.txt
