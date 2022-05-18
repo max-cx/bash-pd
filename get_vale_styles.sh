@@ -91,6 +91,7 @@ wget -qO- https://github.com/eclipse-che/che-docs-vale-style/releases/latest/dow
 # If ‘-’ is used as file, documents will be printed to standard output, disabling link conversion.
 # You would like the output documents to go to standard output instead of to files?
 #   wget -O - http://jagor.srce.hr/ http://www.srce.hr/
+# Fabrice's clarification: "The space is not required, and usually scripts are written for compacity, with short parameters and minimal chars. I started to do the opposite and use long parameters for clarity, but only since a few months. Because in our repository scripts are also educative objects to learn about scripting."
 # http://infozip.sourceforge.net/UnZip.html
 # https://www.tutorialspoint.com/unix_commands/unzip.htm
 # unzip will list, test, or extract files from a ZIP archive
@@ -124,3 +125,12 @@ wget -qO- https://github.com/eclipse-che/che-docs-vale-style/releases/latest/dow
 # Each command in a pipeline is executed in its own subshell, which is
 # a separate process ...
 # (noting that '|' appears in other contexts in https://www.gnu.org/software/bash/manual/bash.txt
+# MUST READ:
+# https://serverfault.com/questions/735882/unzip-from-stdin-to-stdout-funzip-python &
+# https://superuser.com/questions/944778/zip-extractor-reading-archives-from-stdin
+#   The dash after `unzip` is to use stdin as input.
+# Fabrice's clarification:
+# That's an (undocumented) feature in busybox unzip to use stdin
+# The main reason for doing this is to avoid storing the zip file on disk to delete it afterwards.
+# But as only busybox unzip has the feature, it would make more sense, for example, to use another type of archive (.tar.gz) that supports stdin for all implementations.
+
