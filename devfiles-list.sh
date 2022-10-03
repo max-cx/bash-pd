@@ -35,11 +35,13 @@ setvars() {
   "che")
     REPO=https://github.com/eclipse-che/che-devfile-registry.git
     DEVFILESDIR=devfiles/;;
-    # 'devfiles/' is a path inside the previous repository
+  # 'devfiles/' is a path inside the previous repository
+  # FYI https://github.com/eclipse-che/che-devfile-registry/tree/main/devfiles
   "devspaces")
     REPO=https://github.com/redhat-developer/devspaces.git
     DEVFILESDIR=dependencies/che-devfile-registry/devfiles/;;
-    # 'dependencies/che-devfile-registry/devfiles/' is a path inside the previous repository
+  # 'dependencies/che-devfile-registry/devfiles/' is a path inside the previous repository
+  # FYI https://github.com/redhat-developer/devspaces/tree/devspaces-3-rhel-8/dependencies/che-devfile-registry/devfiles
   *)
     echo "Use 'che' or 'devspaces' as the only parameter to this script."
     exit 1;;
@@ -145,6 +147,37 @@ sed '/^displayName:\|^description:\|^tags: \[.*Tech-Preview.*\]/!d;
     sed '/::$/N;
         s/::\n/:: /;' > "$WORKDIR"/snip_$PROJECT-supported-languages.adoc
 }
+# source: `$ man sed`
+# https://www.gnu.org/software/sed/manual/sed.html
+# Sed  is  a  stream  editor.  A stream editor is used to perform basic text transformations on an
+# input stream (a file or input from a pipeline).  While in some ways similar to an  editor  which
+# permits scripted edits (such as ed), sed works by making only one pass over the input(s), and is
+# consequently more efficient.  But it is sed's ability to filter text in a pipeline which partic‐
+# ularly distinguishes it from other types of editors.
+# # d      Delete pattern space.  Start next cycle.
+#   s/regexp/replacement/
+#     Attempt to match regexp against the pattern space.  If successful, replace  that  portion
+#     matched  with  replacement.  The replacement may contain the special character & to refer
+#     to that portion of the pattern space which matched, and the special escapes \1 through \9
+#     to refer to the corresponding matching sub-expressions in the regexp.
+#   /regexp/
+#     Match lines matching the regular expression regexp.
+# The character ^ (caret) in a regular expression matches the beginning of the line.
+#   *
+#     Matches a sequence of zero or more instances of matches for the preceding regular expression,
+#     which must be an ordinary character, a special character preceded by \, a ., a grouped regexp
+#     (see below), or a bracket expression.
+# The character . (dot) matches any single character.
+#  '/\1::/' adds the AsciiDoc syntax element '::'
+#     back-references are regular expression commands which refer to a previous part of the matched
+#     regular expression. Back-references are specified with backslash and a single digit (e.g. ‘\1’).#     The part of the regular expression they refer to is called a subexpression, and is designated
+#     with parentheses.
+#   \digit
+#     Matches the digit-th \(…\) parenthesized subexpression in the regular expression.
+#     This is called a back reference. Subexpressions are implicitly numbered by
+#     counting occurrences of \( left-to-right.
+#  ‘[.’
+#     represents the open collating symbol.
 
 setvars
 getdata
